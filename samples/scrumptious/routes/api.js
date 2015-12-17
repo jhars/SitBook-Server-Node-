@@ -15,14 +15,17 @@ exports.search = function (req, res) {
 };
 
 exports.friends = function (req, res) {
-    FB.api('me/friends', {
-        fields:         'name,picture',
+    FB.api('1734329503463628?fields=context.fields%28all_mutual_friends.limit%28100%29%29', {
+        // fields:         'name,picture',
         limit:          250,
         access_token:   req.session.access_token
     }, function (result) {
         if(!result || result.error) {
             return res.send(500, 'error');
         }
+        console.log("result01");
+        console.log(result.context.all_mutual_friends.data);
+        console.log("result02");
         res.send(result);
     });
 };

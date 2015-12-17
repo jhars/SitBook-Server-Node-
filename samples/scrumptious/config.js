@@ -5,9 +5,9 @@ var config = { };
 config.rootUrl  = process.env.ROOT_URL                  || 'http://localhost:3000/';
 
 config.facebook = {
-    appId:          process.env.FACEBOOK_APPID          || '130243393813697',
-    appSecret:      process.env.FACEBOOK_APPSECRET      || 'c82696768ae4ad8b63db874cb64eb558',
-    appNamespace:   process.env.FACEBOOK_APPNAMESPACE   || 'nodescrumptious',
+    appId:          process.env.FACEBOOK_APPID          || '1707645142804590',
+    appSecret:      process.env.FACEBOOK_APPSECRET      || 'c279a5fe804dec8c1216b7eccbefc625',
+    appNamespace:   process.env.FACEBOOK_APPNAMESPACE   || 'sitboook',
     redirectUri:    process.env.FACEBOOK_REDIRECTURI    ||  config.rootUrl + 'login/callback'
 };
 
