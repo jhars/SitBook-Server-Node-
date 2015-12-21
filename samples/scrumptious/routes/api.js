@@ -49,6 +49,17 @@ exports.friends = function (req, res) {
         console.log(result.context.all_mutual_friends.data);
         console.log("result02");
 
+        var targetMutualFriends = result.context.all_mutual_friends.data;
+        var myID = tempUserID
+
+        var socialContextRoute = "https://sitterbookapi.firebaseio.com/users/" + myID
+
+        var socialContextRef = new Firebase(socialContextRoute);
+    socialContextRef.child('fbfriends/mutual-friends').set(targetMutualFriends);
+    // socialContextRef.child('last').set('Flintstone');
+
+
+
 
      // ============ LOGIC ================ //
 

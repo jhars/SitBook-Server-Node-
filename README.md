@@ -346,6 +346,8 @@ var FB = require('fb');
 
 var urlToParse = 'http://yoururl.com/callback?code=.....#_=_';
 var result = url.parse(urlToParse, true);
+
+
 if(result.query.error) {
     if(result.query.error_description) {
         console.log(result.query.error_description);
