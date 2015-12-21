@@ -41,12 +41,11 @@ app.get( '/search',          api.search);
 
 app.post('/announce',        api.announce);
 app.get( '/meals/:id',       meals.show);
+
 // ========= 2 custom Routes ========== //
-app.get( '/readapi',         api.readAPI);
+// app.get( '/readapi',         api.readAPI);
 app.get( '/friends',         api.friends);
-// app.get( '/winjs/meals/:id', meals.showWinJs);  // this is used for facebook-winjs-sdk sample and not required to actually run this sample
-// app.get( '/template',        api.template);
-// app.get( '/exchange',        api.exchangeToken);
+
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log("Express server listening on port " + app.get('port'));
