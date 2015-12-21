@@ -3,19 +3,10 @@ config          = require('../config'),
 Firebase        = require("firebase"),
 ref             = new Firebase("https://sitterbookapi.firebaseio.com/users");
 
-
-
-
-
-
 exports.friends = function (req, res) {
-
-    // var tempUserID;
     ref.orderByKey().on("child_added", function(snapshot) {
         var tempUserID = snapshot.key();
-        // console.log(currentUserID);
         console.log("current User ID above");
-        // tempUserID = currentUserID;
         
         snapshot.forEach(function(data) {
             var currentUserID = snapshot.key();
@@ -30,31 +21,21 @@ exports.friends = function (req, res) {
                     return res.send(500, 'error');
                 }
                 console.log("result01");
-                // console.log(result.context.all_mutual_friends.data);
-                console.log("result02");
-
                 var targetMutualFriends = result.context.all_mutual_friends.data;
                 var myID = currentUserID
                 var socialContextRoute = "https://sitterbookapi.firebaseio.com/users/" + myID
                 var socialContextRef = new Firebase(socialContextRoute);
                 socialContextRef.child('/fbfriends/first-degree').set(targetMutualFriends);
-                
-
                 console.log(targetMutualFriends);
                 var appUserFirstDegreeFriends = ["bob","sally","Joe"]
                 socialContextRef.child('/fbfriends/first-deg-App').set(appUserFirstDegreeFriends);
+                console.log("result02");
      // ============ LOGIC ================ //
                 // var appUserFirstDegData = result.context.all_mutual_friends.data;
                 // var myID = currentUserID
 
                 //iterate through "result" (friends list)
                 // if 
-
-
-
- 
-
-
      // ============ LOGIC ================ //
      // ============ LOGIC ================ //
      // ============ LOGIC ================ //
