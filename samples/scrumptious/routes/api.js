@@ -2,21 +2,43 @@
 var FB              = require('../../../fb'),
 
     config          = require('../config');
+var Firebase        = require("firebase");
 
-exports.search = function (req, res) {
-    var parameters              = req.query;
-    parameters.access_token     = req.session.access_token;
-    FB.api('/search', req.query, function (result) {
-        if(!result || result.error) {
-            return res.send(500, 'error');
-        }
-        res.send(result);
-    });
+var ref             = new Firebase("https://sitterbookapi.firebaseio.com/users")
+
+// var tempUserID;
+
+
+exports.readAPI = function (req, res) {
+// ref.orderByKey().on("child_added", function(snapshot) {
+//     console.log(snapshot.key());
+//     var currentUserID = snapshot.key();
+//     tempUserID = currentUserID;
+//     console.log(tempUserID);
+//     res.send(snapshot.key());
+// });
 };
 
+
+
+
+
 exports.friends = function (req, res) {
-    FB.api('1734329503463628?fields=context.fields%28all_mutual_friends.limit%28100%29%29', {
-        // fields:         'name,picture',
+
+    var tempUserID;
+
+    ref.orderByKey().on("child_added", function(snapshot) {
+    // console.log(snapshot.key());
+    var currentUserID = snapshot.key();
+    tempUserID = currentUserID;
+
+
+    snapshot.forEach(function(data) {
+
+    var mutual_friends_API_call = tempUserID + '?fields=context.fields%28all_mutual_friends.limit%28100%29%29'
+    console.log(mutual_friends_API_call)
+
+    FB.api(mutual_friends_API_call, {
         limit:          250,
         access_token:   req.session.access_token
     }, function (result) {
@@ -26,6 +48,36 @@ exports.friends = function (req, res) {
         console.log("result01");
         console.log(result.context.all_mutual_friends.data);
         console.log("result02");
+
+
+     // ============ LOGIC ================ //
+
+
+
+
+        res.send(result);
+    });
+
+
+
+    // console.log("The " + data.key() + " dinosaur's score is " + data.val());
+    console.log("XXX", tempUserID);
+      });
+
+});
+    // var mutual_friends_API_call = tempUserID + '?fields=context.fields%28all_mutual_friends.limit%28100%29%29'
+
+};
+
+//===================================================//
+
+exports.search = function (req, res) {
+    var parameters              = req.query;
+    parameters.access_token     = req.session.access_token;
+    FB.api('/search', req.query, function (result) {
+        if(!result || result.error) {
+            return res.send(500, 'error');
+        }
         res.send(result);
     });
 };

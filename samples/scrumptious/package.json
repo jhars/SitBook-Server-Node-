@@ -6,8 +6,10 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.1.0",
     "ejs": "*",
-    "step": "0.0.5"
+    "express": "3.1.0",
+    "firebase": "^2.3.2",
+    "step": "0.0.5",
+    "url": "^0.11.0"
   }
 }
